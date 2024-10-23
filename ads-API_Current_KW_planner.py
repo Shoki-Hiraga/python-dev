@@ -4,7 +4,7 @@ from setting_file.header import *
 
 
 # Google Adsクライアントの初期化
-client = GoogleAdsClient.load_from_storage("C:/Users/hiraga/Desktop/Python/setting_file/ads_api_current_google-ads.yaml")
+client = GoogleAdsClient.load_from_storage(api_yaml.current)
 client_id = "2973188677"
 # 遅延処理
 deley_time = 3

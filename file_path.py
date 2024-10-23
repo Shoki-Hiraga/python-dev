@@ -4,7 +4,7 @@ from setting_file import csv_output_path
 file_directory_index = 1 # 使用するファイルパスのインデックス番号
 file_Directorys = {
     1: csv_output_path.out_office,
-    2: csv_output_path.out_a09,
+    2: csv_output_path.out_main,
     3: csv_output_path.out_raytrek    
 }
 

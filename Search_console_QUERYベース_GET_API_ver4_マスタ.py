@@ -11,7 +11,7 @@ from setting_file.header import *
 
 # ファイルパス
 csv_directory = csv_output_path.out_office
-# csv_directory = csv_output_path.out_a09
+# csv_directory = csv_output_path.out_main
 # csv_directory = csv_output_path.out_raytrek
 csv_filename = "Search Console_API_Query.csv"
 output_file = os.path.join(csv_directory, csv_filename)

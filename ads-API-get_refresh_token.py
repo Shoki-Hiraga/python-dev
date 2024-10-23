@@ -5,8 +5,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 # クライアントIDとクライアントシークレットが含まれるJSONファイルを指定する
-# CLIENT_SECRETS_FILE = "C:/Users/hiraga/Desktop/Python/setting_file/json_file/ads-api_private_client_secret_827980945440-aalm2mrlqrsgkcrfvt90cegnbbg8l206.apps.googleusercontent.com.json"
-CLIENT_SECRETS_FILE = "C:/Users/hiraga/Desktop/Python/setting_file/json_file/ads-api_current_client_secret_938116253219-skvsisjd3ledggousef891dt075bmcd0.apps.googleusercontent.com.json"
+# CLIENT_SECRETS_FILE = "C:/Users/hiraga/Desktop/Python-dev/setting_file/json_file/ads-api_private_client_secret_827980945440-aalm2mrlqrsgkcrfvt90cegnbbg8l206.apps.googleusercontent.com.json"
+CLIENT_SECRETS_FILE = "C:/Users/hiraga/Desktop/Python-dev/setting_file/json_file/ads-api_current_client_secret_938116253219-skvsisjd3ledggousef891dt075bmcd0.apps.googleusercontent.com.json"
 
 # Google Ads APIのスコープ
 SCOPES = ['https://www.googleapis.com/auth/adwords']

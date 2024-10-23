@@ -8,7 +8,7 @@ def scrape_google_ads():
 
     csv_headers = ["URL", "Title"]
     csv_directory = csv_output_path.out_office
-    # csv_directory = csv_output_path.out_a09
+    # csv_directory = csv_output_path.out_main
     # csv_directory = csv_output_path.out_raytrek
     csv_filename = "ad_search_results.csv"
     output_file = os.path.join(csv_directory, csv_filename)
