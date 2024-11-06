@@ -16,3 +16,5 @@ git push -u origin main
 /Python-dev\setting_file\json_file
 /Python-dev\setting_file\yaml_file
 は個別でgit外管理
+
+setting_file.7z のパスワードは90Cbのやつ
