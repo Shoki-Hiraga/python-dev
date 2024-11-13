@@ -1,5 +1,4 @@
 from setting_file.header import *
-from setting_file.scraping_KW.organic_KW_pagenation import search_keywords_list
 
 # APIキーの選択
 api_key_index = 1 # 使用するAPIキーのインデックス番号
@@ -26,6 +25,9 @@ delaytime = 2.000002
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
 file_name = "site_search_results_pagenation5.csv"
 output_file = os.path.join(file_directory, file_name)
+
+# KWリスト
+from setting_file.scraping_KW.organic_KW_pagenation import search_keywords_list
 
 # 1ページあたりの検索件数
 results_per_page = 10
