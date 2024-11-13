@@ -1,5 +1,6 @@
 from setting_file.header import *
-from setting_file.scraping_url.Gmarket_price_url import URLS
+# URLリスト
+from setting_file.scraping_url.Gmarket_price_url import URLS #URLの格納先 
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定

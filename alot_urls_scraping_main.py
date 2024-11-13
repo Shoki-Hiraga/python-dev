@@ -58,4 +58,3 @@ class alot_urls_scraping:
         time.sleep(delay_time)  # さらに遅延を挟む
         print(f'{delay_time}秒の遅延処理 / status code {response.status_code} {scraped_data}')
         return url, scraped_data, response.status_code
-

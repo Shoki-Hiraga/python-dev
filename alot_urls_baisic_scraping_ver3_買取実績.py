@@ -1,4 +1,7 @@
 from setting_file.header import *
+# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
+# 個別URLリスト
+from setting_file.scraping_url.Qcarpage_kaitori_ruslut import URLS
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
@@ -26,12 +29,6 @@ csv_delimiter='★'
 # # URLリストの生成
 # base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
 # URLS = [base_url.format(i) + parameter for i in range(pagenation_min, pagenation_max + 1)]
-
-
-
-# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
-# 個別URLリスト
-from setting_file.scraping_url.Qcarpage_kaitori_ruslut import URLS
 
 
 for url in URLS:

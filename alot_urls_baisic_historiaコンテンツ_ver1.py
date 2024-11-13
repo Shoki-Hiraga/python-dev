@@ -1,4 +1,6 @@
 from setting_file.header import *
+# URLリスト
+from setting_file.scraping_url.historia_contents_url import URLS #URLの格納先 
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
@@ -11,8 +13,6 @@ output_file = os.path.join(file_directory, file_name)
 # gc = gspread.authorize(credentials)
 # ヘッダー行の設定。ここではウェブページからスクレイプする項目名を列挙しています
 
-# URLリスト
-from setting_file.scraping_url.historia_contents_url import URLS
 
 header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
 for url in URLS:
