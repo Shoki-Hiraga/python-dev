@@ -1,4 +1,5 @@
 from setting_file.header import *
+from setting_file.Search_Console_set.url_base_master import URLS
 
 # # スプレッドシート認証
 # scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -10,11 +11,9 @@ from setting_file.header import *
 
 
 # ファイルパス
-csv_directory = csv_output_path.out_office
-# csv_directory = csv_output_path.out_main
-# csv_directory = csv_output_path.out_raytrek
-csv_filename = "Search Console_API_URL.csv"
-output_file = os.path.join(csv_directory, csv_filename)
+file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
+file_name = "Search Console_API_URL.csv"
+output_file = os.path.join(file_directory, file_name)
 
 # URLごとに出力するCSVファイルのファイル名
 header_row = ['URL', '検索クエリ', '表示回数', 'クリック数', 'クリック率', '掲載順位']
@@ -60,25 +59,6 @@ def get_search_url_data(site_url, page_url):
         return [], page_url
 
 
-# 複数のURLを指定します
-urls = [
-"https://www.qsha-oh.com/aging-paintcar/",
-"https://www.qsha-oh.com/amesha/",
-"https://www.qsha-oh.com/classic-supercar/",
-"https://www.qsha-oh.com/custom/",
-"https://www.qsha-oh.com/damage/",
-"https://www.qsha-oh.com/immobile/",
-"https://www.qsha-oh.com/itasha/",
-"https://www.qsha-oh.com/landcruiser/",
-"https://www.qsha-oh.com/ninemania/",
-"https://www.qsha-oh.com/other/",
-"https://www.qsha-oh.com/repair/",
-"https://www.qsha-oh.com/skyoh/",
-"https://www.qsha-oh.com/souzoku/",
-"https://www.qsha-oh.com/sportscar/",
-"https://www.qsha-oh.com/submerged-car/"
-]
-
 try:
     with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
@@ -87,7 +67,7 @@ try:
         # # スプレッドシートにヘッダー行を書き込む
         # worksheet.append_row(header_row, value_input_option='USER_ENTERED')
 
-        for url in urls:
+        for url in URLS:
             # URLの統計情報を取得
             search_url_data, original_url = get_search_url_data(site_url, url)
 

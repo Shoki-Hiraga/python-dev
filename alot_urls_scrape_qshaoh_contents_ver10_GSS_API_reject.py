@@ -1,9 +1,9 @@
 from setting_file.header import *
 
 # ファイルパス
-# csv_directory = csv_output_path.out_office
+csv_directory = csv_output_path.out_office
 # csv_directory = csv_output_path.out_main
-csv_directory = csv_output_path.out_raytrek
+# csv_directory = csv_output_path.out_raytrek
 csv_filename = "scraped_data.csv"
 output_file = os.path.join(csv_directory, csv_filename)
 
@@ -15,22 +15,15 @@ output_file = os.path.join(csv_directory, csv_filename)
 # スプレッドシート設定
 # worksheet = gc.open("pythonscrape").sheet1
 
+# 個別URLリスト
+from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
+
 
 header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
+for url in URLS:
+    # URLを使った処理
+    print(f"Scraping {url}...")
 
-urls = [
-'https://www.qsha-oh.com/maker/audi/',
-'https://www.qsha-oh.com/maker/daimler/',
-'https://www.qsha-oh.com/maker/morris/',
-'https://www.qsha-oh.com/maker/bl/',
-'https://www.qsha-oh.com/maker/westfield/',
-'https://www.qsha-oh.com/maker/ac-cars/',
-'https://www.qsha-oh.com/maker/us-lexus/',
-'https://www.qsha-oh.com/maker/us-honda/',
-'https://www.qsha-oh.com/maker/us-mazda/',
-'https://www.qsha-oh.com/maker/birkin/',
-'https://www.qsha-oh.com/maker/donkervoort/'
-]
 
 # アクセスエラー発生時の最大リトライ回数を設定
 MAX_RETRIES = 10
@@ -106,7 +99,7 @@ with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # URLリストに対して並行してスクレイピングを実行
-        for url in urls:
+        for url in URLS:
             result = scrape_url(url)  # 各URLに対してスクレイピングを実行
             url, scraped_data, status_code = result
             max_length = max(len(data) for data in scraped_data)  # 最大の列数を取得
@@ -117,7 +110,7 @@ with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
                 csv_writer.writerow(row_data)
 
             completed_count += 1  # 完了したURLの数を更新
-            log_progress(completed_count, len(urls))  # 進捗のログ
+            log_progress(completed_count, len(URLS))  # 進捗のログ
 
             print(f'{header_row[0]}: {url}')  # 完了したURLを表示
             print(' ')

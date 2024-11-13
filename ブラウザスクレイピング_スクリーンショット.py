@@ -1,4 +1,6 @@
 from setting_file.header import *
+from setting_file.scraping_url.browser_scraping_url import URLS
+
 
 # ChromeDriverのパスを指定
 driver_path = "C:/chromedriver.exe"  # 実際のパスに置き換えてください
@@ -132,60 +134,13 @@ def take_full_page_screenshot(url, output_directory):
 file_directory = file_path.file_directory
 
 # スクリーンショットを取得するURLのリスト
-urls = [
-"https://www.currentmotor.co.jp/",
-"https://www.currentmotor.co.jp/privacy/",
-"https://www.currentmotor.co.jp/recruit-privacy/",
-"https://www.currentmotor.co.jp/privacy_loggy/",
-"https://www.currentmotor.co.jp/lp2303/",
-"https://www.currentmotor.co.jp/business/",
-"https://www.currentmotor.co.jp/company/",
-"https://www.currentmotor.co.jp/company/message/",
-"https://www.currentmotor.co.jp/company/boardmember/",
-"https://www.currentmotor.co.jp/company/philosophy/",
-"https://www.currentmotor.co.jp/company/history/",
-"https://www.currentmotor.co.jp/company/socialcontribution/",
-"https://www.currentmotor.co.jp/company/sdgs/",
-"https://www.currentmotor.co.jp/business/regeneration/",
-"https://www.currentmotor.co.jp/business/puchase/",
-"https://www.currentmotor.co.jp/business/qshaoh/",
-"https://www.currentmotor.co.jp/business/sales/",
-"https://www.currentmotor.co.jp/business/gcj/",
-"https://www.currentmotor.co.jp/business/gcus/",
-"https://www.currentmotor.co.jp/business/gcc/",
-"https://www.currentmotor.co.jp/business/it/",
-"https://www.currentmotor.co.jp/business/currenttech/",
-"https://www.currentmotor.co.jp/business/parts/",
-"https://www.currentmotor.co.jp/business/euroauto/",
-"https://www.currentmotor.co.jp/business/crt/",
-"https://www.currentmotor.co.jp/business/ev/",
-"https://www.currentmotor.co.jp/business/dr/",
-"https://www.currentmotor.co.jp/catgory/notice/",
-"https://www.currentmotor.co.jp/catgory/notice/info/",
-"https://www.currentmotor.co.jp/notice/media/",
-"https://www.currentmotor.co.jp/news_notice/",
-"https://www.currentmotor.co.jp/category/notice/",
-"https://www.currentmotor.co.jp/category/notice/info/",
-"https://www.currentmotor.co.jp/category/notice/media/",
-"https://www.currentmotor.co.jp/category/notice/news/",
-"https://www.currentmotor.co.jp/ir/",
-"https://www.currentmotor.co.jp/ir/results/",
-"https://www.currentmotor.co.jp/ir/issuer/",
-"https://www.currentmotor.co.jp/ir/governance/",
-"https://www.currentmotor.co.jp/ir/meeting/",
-"https://www.currentmotor.co.jp/ir/rules/",
-"https://www.currentmotor.co.jp/ir/announcement/",
-"https://www.currentmotor.co.jp/ir/contact/",
-"https://www.currentmotor.co.jp/ir/outlook/",
-"https://www.currentmotor.co.jp/recruit/",
-"https://www.currentmotor.co.jp/contact/",
-"https://www.currentmotor.co.jp/ma/",
-"https://www.currentmotor.co.jp/ir_info/settlement/",
-"https://www.currentmotor.co.jp/ir_info/ir-information-all/"
-]
+for url in URLS:
+    # URLを使った処理
+    print(f"Scraping {url}...")
+
 
 # 各URLに対してスクリーンショットを取得
-for url in urls:
+for url in URLS:
     take_full_page_screenshot(url, file_directory)
 
 # WebDriverを終了

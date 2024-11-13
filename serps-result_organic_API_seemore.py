@@ -1,5 +1,5 @@
 from setting_file.header import *
-
+from setting_file.scraping_KW.organic_KW_seemore import search_keywords_list
 
 # APIキーの選択
 api_key_index = 1 # 使用するAPIキーのインデックス番号
@@ -29,12 +29,6 @@ output_file = os.path.join(file_directory, file_name)
 
 # 上位何位まで検索するか
 page_num = 10
-
-# 検索キーワードのリスト
-search_keywords = [
-'車 買取ランキング',
-'車 買取'
-    ]
 
 # Google Custom Search APIサービスの構築
 service = build("customsearch", "v1", developerKey=google_api_key)
@@ -77,6 +71,6 @@ def search_and_write_to_csv(keyword):
         print(f"このKWでエラーが発生しました '{keyword}': {e}")
 
 # 各キーワードに対して検索を実行
-for keyword in search_keywords:
+for keyword in search_keywords_list:
     search_and_write_to_csv(keyword)
     time.sleep(1)  # APIの制限を考慮して待機時間を追加

@@ -1,33 +1,6 @@
-from setting_file.header import *
-from setting_file.scraping_url.Gmarket_price_url import URLS
-
-# ファイルパス
-file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
-file_name = "Gscraped_data.csv"
-output_file = os.path.join(file_directory, file_name)
-
-# # スプレッドシート認証
-# scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-# credentials = ServiceAccountCredentials.from_json_keyfile_name("C:/Users/STAFF1088/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0/python-scrape.json", scope)
-# gc = gspread.authorize(credentials)
-# ヘッダー行の設定。ここではウェブページからスクレイプする項目名を列挙しています
-
-# 個別URLリスト
-from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
-
-
-header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
-
-for url in URLS:
-    # URLを使った処理
-    print(f"Scraping {url}...")
-
-# アクセスエラー発生時の最大リトライ回数を設定
-MAX_RETRIES = 10
-
 # ウェブページの情報をスクレイプする関数
 def scrape_url(url):
-    delay_time = random.uniform(1, 5)  # リクエスト間のランダムな遅延時間を設定
+    delay_time = random.uniform(0.001, 0.005)  # リクエスト間のランダムな遅延時間を設定
     user_agent = random.choice(user_agents)  # リクエスト用のランダムなユーザーエージェントを選択
     retry_count = 0  # リトライ回数のカウンター
 
@@ -58,28 +31,27 @@ def scrape_url(url):
     soup = BeautifulSoup(response.text, "html.parser")
     
     # CSSセレクタの配列
-    selectors = [
-        ('body > div:nth-child(2) > div.org_wrapper.germany_wrapper > section.car__price-list > div.car__price-list__table', 'text')
-
-    ]
+    selectors = CSS_selectors
 
     scraped_data = [[] for _ in range(len(selectors))]
     
     # 各セレクターに対してスクレイピングを実行し、結果を保存
     for index, (selector, *data_types) in enumerate(selectors):
         elements = soup.select(selector)
-        if 'link' in data_types:
-            # リンクのテキストとURLを抽出
-            scraped_data[index] = [(element.get('href', ''), element.get_text(strip=True)) for element in elements]
+        if elements:
+            if 'link' in data_types:
+                # リンクのテキストとURLを抽出
+                scraped_data[index] = [(element.get('href', ''), element.get_text(strip=True)) for element in elements]
+            else:
+                # テキストのみを抽出
+                scraped_data[index] = [element.get_text(strip=True).encode('utf-8').decode('utf-8') for element in elements]
         else:
-            # テキストのみを抽出
-            scraped_data[index] = [element.get_text(strip=True).encode('utf-8').decode('utf-8') for element in elements]
-    
+            # セレクタに該当する要素が無い場合は空文字列を追加
+            scraped_data[index] = ['nodata']
+
     time.sleep(delay_time)  # さらに遅延を挟む
-    print(f'{delay_time}秒の遅延処理 / status code{response.status_code} {scraped_data}')
+    print(f'{delay_time}秒の遅延処理 / status code {response.status_code} {scraped_data}')
     return url, scraped_data, response.status_code
-
-
 
 # スクレイピングの進捗をログに記録する関数
 def log_progress(completed_count, total_count):
@@ -91,7 +63,7 @@ completed_count = 0
 
 # CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込む
 with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
-    csv_writer = csv.writer(csv_file)
+    csv_writer = csv.writer(csv_file, delimiter = csv_delimiter)
     csv_writer.writerow(header_row)
 
     with concurrent.futures.ThreadPoolExecutor() as executor:

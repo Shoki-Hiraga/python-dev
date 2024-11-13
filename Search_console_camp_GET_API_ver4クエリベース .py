@@ -1,4 +1,5 @@
 from setting_file.header import *
+from setting_file.Search_Console_set.query_camp import Queries
 
 # # スプレッドシート認証
 # scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -8,14 +9,10 @@ from setting_file.header import *
 # # スプレッドシート設定
 # worksheet = gc.open("Python_scrape_API").sheet1
 
-
 # ファイルパス
-# csv_directory = csv_output_path.out_office
-csv_directory = csv_output_path.out_main
-# csv_directory = csv_output_path.out_raytrek
-csv_filename = "Camp定点観測.csv"
-output_file = os.path.join(csv_directory, csv_filename)
-
+file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
+file_name = "Camp定点観測.csv"
+output_file = os.path.join(file_directory, file_name)
 
 # JSONファイルのパスを指定
 SERVICE_ACCOUNT_FILE = api_json.camp
@@ -60,21 +57,6 @@ header_row = ['検索クエリ', '表示回数', 'クリック数', 'クリッ�
 # 対象のサイトURLを指定します
 site_url = 'https://camp.garagecurrent.com/'
 
-# 複数の検索クエリを指定します
-queries = [
-'アドリア 評判',
-'ケイワークス 評判',
-'atoz 評判',
-'カトーモーター 評判',
-'セキソーボディ 評判',
-'アネックス 評判',
-'ドリーム・エーティー 評判',
-'バンテック 評判',
-'ファンルーチェ 評判',
-'インディアナRV 評判',
-'キャンパー厚木 評判',
-'バンショップミカミ 評判'
-    ]
 
 # 全体の結果を格納するリストを作成
 all_results = []
@@ -87,7 +69,7 @@ with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
     # worksheet.append_row(header_row, value_input_option='USER_ENTERED')
 
 try:
-    for query in queries:
+    for query in Queries:
         # クエリの統計情報を取得
         search_query_data, original_query = get_search_query_data(site_url, query)
 

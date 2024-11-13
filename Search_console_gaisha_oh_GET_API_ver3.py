@@ -1,4 +1,5 @@
 from setting_file.header import *
+from setting_file.Search_Console_set.url_gaisha_oh import URLS
 
 # # スプレッドシート認証
 # scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -58,42 +59,6 @@ def get_search_url_data(site_url, page_url):
         return [], page_url
 
 
-# 複数のURLを指定します
-urls = [
-"https://www.gaisha-oh.com/germany/porsche/",
-"https://www.gaisha-oh.com/germany/benz/",
-"https://www.gaisha-oh.com/germany/bmw/",
-"https://www.gaisha-oh.com/germany/mini/",
-"https://www.gaisha-oh.com/germany/volkswagen/",
-"https://www.gaisha-oh.com/germany/audi/",
-"https://www.gaisha-oh.com/germany/ruf/",
-"https://www.gaisha-oh.com/germany/amg/",
-"https://www.gaisha-oh.com/italy/alfaromeo/",
-"https://www.gaisha-oh.com/italy/ferrari/",
-"https://www.gaisha-oh.com/italy/lamborghini/",
-"https://www.gaisha-oh.com/italy/fiat/",
-"https://www.gaisha-oh.com/italy/maserati/",
-"https://www.gaisha-oh.com/italy/abarth/",
-"https://www.gaisha-oh.com/italy/lancia/",
-"https://www.gaisha-oh.com/italy/autobianchi/",
-"https://www.gaisha-oh.com/uk/rolls-royce/",
-"https://www.gaisha-oh.com/uk/bentley/",
-"https://www.gaisha-oh.com/uk/jaguar/",
-"https://www.gaisha-oh.com/uk/daimler/",
-"https://www.gaisha-oh.com/uk/astonmartin/",
-"https://www.gaisha-oh.com/uk/landrover/",
-"https://www.gaisha-oh.com/uk/rover/",
-"https://www.gaisha-oh.com/uk/lotus/",
-"https://www.gaisha-oh.com/france/peugeot/",
-"https://www.gaisha-oh.com/france/renault/",
-"https://www.gaisha-oh.com/france/citroen/",
-"https://www.gaisha-oh.com/france/ds_automobiles/",
-"https://www.gaisha-oh.com/france/venturi/",
-"https://www.gaisha-oh.com/france/mvs/",
-"https://www.gaisha-oh.com/france/martin/",
-"https://www.gaisha-oh.com/france/teilhol/"
-]
-
 try:
     with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
@@ -102,7 +67,7 @@ try:
         # # スプレッドシートにヘッダー行を書き込む
         # worksheet.append_row(header_row, value_input_option='USER_ENTERED')
 
-        for url in urls:
+        for url in URLS:
             # URLの統計情報を取得
             search_url_data, original_url = get_search_url_data(site_url, url)
 

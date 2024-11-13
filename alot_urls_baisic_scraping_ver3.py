@@ -1,6 +1,5 @@
 from setting_file.header import *
 
-
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
 file_name = "scraped_data.csv"
@@ -14,7 +13,7 @@ output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
 header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
-
+    
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
 
@@ -27,30 +26,29 @@ csv_delimiter='★'
 
 # # URLリストの生成
 # base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
-# urls = [base_url.format(i) + parameter for i in range(pagenation_min, pagenation_max + 1)]
-
-
+# URLS = [base_url.format(i) + parameter for i in range(pagenation_min, pagenation_max + 1)]
 
 # ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
 # 個別URLリスト
-urls = [
-'https://www.qsha-oh.com/maker/nissan/patrol/',
-'https://www.qsha-oh.com/maker/nissan/gazelle/',
-'https://www.qsha-oh.com/maker/nissan/y31-gloria/',
-'https://www.qsha-oh.com/maker/nissan/skyline-wagon-1800-sporty-gl/',
-'https://www.qsha-oh.com/maker/nissan/sunny-van/',
-'https://www.qsha-oh.com/maker/nissan/skyline-van/',
-'https://www.qsha-oh.com/maker/nissan/gloria-van/',
-'https://www.qsha-oh.com/maker/nissan/datsun-pickup/',
-'https://www.qsha-oh.com/maker/nissan/fairlady-z-gs30/',
-'https://www.qsha-oh.com/maker/nissan/laurel/',
-'https://www.qsha-oh.com/maker/nissan/skyline-gts25t-type-m/',
-'https://www.qsha-oh.com/maker/nissan/cedric-van/',
-'https://www.qsha-oh.com/maker/nissan/cefiro/',
-'https://www.qsha-oh.com/maker/nissan/cefiro-wagon/'
+from setting_file.scraping_url.basic_scraping_url import URLS
+
+for url in URLS:
+    # URLを使った処理
+    print(f"Scraping {url}...")
+
+
+# CSSセレクタの配列
+CSS_selectors = [
+    ('#app > div.model > section.c-marketprice', 'text'),  
+    ('#app > div.model > section.c-content', 'text'),  
+    # ('.cassetteMain__title a', 'text'),
+    # # ('.cassetteMain__title a', 'link'),  # リンクを取得する場合
+    # # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
+    # ('.basePrice__content', 'text'),  
+    # ('div.cassetteWrap:nth-of-type(n+3) dt:-soup-contains("走行距離") + dd', 'text'),  
+    # ('dt:-soup-contains("年式") + .specList__data span.specList__emphasisData', 'text'),  
+    # ('.carListWrap dt:-soup-contains("修復歴") + dd', 'text')  
 ]
-
-
 
 # アクセスエラー発生時の最大リトライ回数を設定
 MAX_RETRIES = 10
@@ -88,17 +86,7 @@ def scrape_url(url):
     soup = BeautifulSoup(response.text, "html.parser")
     
     # CSSセレクタの配列
-    selectors = [
-        ('#app > div.model > section.c-marketprice', 'text'),  
-        ('#app > div.model > section.c-content', 'text'),  
-        # ('.cassetteMain__title a', 'text'),
-        # # ('.cassetteMain__title a', 'link'),  # リンクを取得する場合
-        # # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
-        # ('.basePrice__content', 'text'),  
-        # ('div.cassetteWrap:nth-of-type(n+3) dt:-soup-contains("走行距離") + dd', 'text'),  
-        # ('dt:-soup-contains("年式") + .specList__data span.specList__emphasisData', 'text'),  
-        # ('.carListWrap dt:-soup-contains("修復歴") + dd', 'text')  
-    ]
+    selectors = CSS_selectors
 
     scraped_data = [[] for _ in range(len(selectors))]
     
@@ -135,7 +123,7 @@ with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # URLリストに対して並行してスクレイピングを実行
-        for url in urls:
+        for url in URLS:
             result = scrape_url(url)  # 各URLに対してスクレイピングを実行
             url, scraped_data, status_code = result
             max_length = max(len(data) for data in scraped_data)  # 最大の列数を取得
@@ -146,7 +134,7 @@ with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
                 csv_writer.writerow(row_data)
 
             completed_count += 1  # 完了したURLの数を更新
-            log_progress(completed_count, len(urls))  # 進捗のログ
+            log_progress(completed_count, len(URLS))  # 進捗のログ
 
             print(f'{header_row[0]}: {url}')  # 完了したURLを表示
             print(' ')
