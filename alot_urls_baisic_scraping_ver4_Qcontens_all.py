@@ -2,7 +2,8 @@ from setting_file.header import *
 from alot_urls_scraping_main import alot_urls_scraping
 # ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
 # 個別URLリスト
-from setting_file.scraping_url.basic_scraping_url import URLS
+from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
+
 
 scraping_func = alot_urls_scraping
 ()
