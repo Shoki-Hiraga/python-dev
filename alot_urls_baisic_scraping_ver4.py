@@ -4,8 +4,11 @@ from alot_urls_scraping_main import alot_urls_scraping
 # 個別URLリスト
 from setting_file.scraping_url.basic_scraping_url import URLS
 
-scraping_func = alot_urls_scraping
+scraping_func_instance = alot_urls_scraping
 ()
+
+# スクレイピング遅延処理
+delay_time_set = random.uniform(3.1, 5.2)
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
@@ -50,7 +53,7 @@ CSS_selectors = [
 # アクセスエラー発生時の最大リトライ回数を設定
 MAX_RETRIES = 10
 
-scraping_func.scrape_url(url, CSS_selectors)
+scraping_func_instance.scrape_url(url, CSS_selectors, delay_time_set)
 
 # スクレイピングの進捗をログに記録する関数
 def log_progress(completed_count, total_count):
@@ -68,7 +71,7 @@ with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # URLリストに対して並行してスクレイピングを実行
         for url in URLS:
-            result = scraping_func.scrape_url(url, CSS_selectors)  # 各URLに対してスクレイピングを実行
+            result = scraping_func_instance.scrape_url(url, CSS_selectors, delay_time_set)  # 各URLに対してスクレイピングを実行
             url, scraped_data, status_code = result
             max_length = max(len(data) for data in scraped_data)  # 最大の列数を取得
             

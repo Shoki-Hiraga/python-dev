@@ -1,5 +1,6 @@
 from setting_file.header import *
-# URLリスト
+# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
+# 個別URLリスト
 from setting_file.scraping_url.Gmarket_price_url import URLS #URLの格納先 
 
 # ファイルパス
@@ -12,9 +13,6 @@ output_file = os.path.join(file_directory, file_name)
 # credentials = ServiceAccountCredentials.from_json_keyfile_name("C:/Users/STAFF1088/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0/python-scrape.json", scope)
 # gc = gspread.authorize(credentials)
 # ヘッダー行の設定。ここではウェブページからスクレイプする項目名を列挙しています
-
-# 個別URLリスト
-from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
 
 
 header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']

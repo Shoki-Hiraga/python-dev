@@ -1,5 +1,6 @@
 from setting_file.header import *
-# URLリスト
+# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
+# 個別URLリスト
 from setting_file.scraping_url.historia_contents_url import URLS #URLの格納先 
 
 # ファイルパス

@@ -3,10 +3,10 @@ from setting_file.header import *
 
 class alot_urls_scraping:
     # ウェブページの情報をスクレイプする関数
-    def scrape_url(url, CSS_selectors):
+    def scrape_url(url, CSS_selectors, delay_time_set):
         # アクセスエラー発生時の最大リトライ回数を設定
         MAX_RETRIES = 10
-        delay_time = random.uniform(0.001, 0.005)  # リクエスト間のランダムな遅延時間を設定
+        delay_time = delay_time_set  # リクエスト間のランダムな遅延時間を設定
         user_agent = random.choice(user_agents)  # リクエスト用のランダムなユーザーエージェントを選択
         retry_count = 0  # リトライ回数のカウンター
 
