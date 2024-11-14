@@ -1,14 +1,6 @@
 from setting_file.header import *
+# 個別URLリスト
 from setting_file.Search_Console_set.query_base_master import Queries
-
-# # スプレッドシート認証
-# scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-# credentials = ServiceAccountCredentials.from_json_keyfile_name('C:/Users/STAFF1088/AppData/Local/Programs/Python/python-scrape.json', scope)
-# gc = gspread.authorize(credentials)
-
-# # スプレッドシート設定
-# worksheet = gc.open("Python_scrape_API").sheet1
-
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定

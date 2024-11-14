@@ -2,21 +2,18 @@ from setting_file.header import *
 from alot_urls_scraping_main import alot_urls_scraping
 # ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
 # 個別URLリスト
-from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
+from setting_file.scraping_url.basic_scraping_url import URLS
 
 scraping_func_instance = alot_urls_scraping
 ()
 
 # スクレイピング遅延処理
-delay_time_set = random.uniform(3.1, 5.2)
+delay_time_set = random.uniform(00.1, 00.2)
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
 file_name = "scraped_data.csv"
 output_file = os.path.join(file_directory, file_name)
-
-# スクレイピング遅延処理
-
 
 # CSVヘッダー行の設定
 header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
@@ -42,8 +39,7 @@ for url in URLS:
 
 # CSSセレクタの配列
 CSS_selectors = [
-    ('#app > div.model > section.c-marketprice', 'text'),  
-    ('#app > div.model > section.c-content', 'text'),  
+    ('a.c-model-list__item', 'link'),  
     # ('.cassetteMain__title a', 'text'),
     # # ('.cassetteMain__title a', 'link'),  # リンクを取得する場合
     # # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
