@@ -8,18 +8,15 @@ scraping_func_instance = alot_urls_scraping
 ()
 
 # スクレイピング遅延処理
-delay_time_set = random.uniform(3.1, 5.2)
+delay_time_set = random.uniform(000.1, 000.2)
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
 file_name = "scraped_data.csv"
 output_file = os.path.join(file_directory, file_name)
 
-# スクレイピング遅延処理
-
-
 # CSVヘッダー行の設定
-header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
+header_row = ['URL', '買取実績', '買取相場', 'テキストコンテンツ', 'お客様の声']
     
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
@@ -42,10 +39,10 @@ for url in URLS:
 
 # CSSセレクタの配列
 CSS_selectors = [
-    ('#app > div.model > section.c-marketprice', 'text'),  
-    ('#app > div.model > section.c-content', 'text'),  
-    # ('.cassetteMain__title a', 'text'),
-    # # ('.cassetteMain__title a', 'link'),  # リンクを取得する場合
+    ('p.maker__results__description', 'text'),  
+    ('h2.c-marketprice__title', 'text'),  
+    ('div.c-content__inner', 'text'),
+    ('h2.c-reviews__title', 'text')
     # # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
     # ('.basePrice__content', 'text'),  
     # ('div.cassetteWrap:nth-of-type(n+3) dt:-soup-contains("走行距離") + dd', 'text'),  
