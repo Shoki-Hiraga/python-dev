@@ -12,6 +12,7 @@ import logging
 import pytesseract
 import pdfplumber
 import base64
+import difflib
 from PIL import Image
 from io import BytesIO
 from google.cloud import vision

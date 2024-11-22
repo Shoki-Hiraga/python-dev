@@ -32,7 +32,7 @@ from setting_file.scraping_KW.organic_KW_pagenation import search_keywords_list
 # 1ページあたりの検索件数
 results_per_page = 10
 # ページネーションを何ページ取得するか指定
-max_pages_to_fetch = 1
+max_pages_to_fetch = 3
 
 # Google Custom Search APIサービスの構築
 service = build("customsearch", "v1", developerKey=google_api_key)
