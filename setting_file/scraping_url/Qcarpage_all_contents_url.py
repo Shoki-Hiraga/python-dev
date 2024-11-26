@@ -1,5 +1,5 @@
 URLS = [
-    "https://www.qsha-oh.com/maker/toyota/10-soarer/",
+"https://www.qsha-oh.com/maker/toyota/10-soarer/",
 "https://www.qsha-oh.com/maker/toyota/20-alphard/",
 "https://www.qsha-oh.com/maker/toyota/20-soarer/",
 "https://www.qsha-oh.com/maker/toyota/20-vellfire/",

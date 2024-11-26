@@ -47,10 +47,19 @@ class alot_urls_scraping:
             if elements:
                 if 'link' in data_types:
                     # リンクのテキストとURLを抽出
-                    scraped_data[index] = [(element.get('href', ''), element.get_text(strip=True)) for element in elements]
+                    scraped_data[index] = [
+                        (element.get('href', ''), element.get_text(strip=True)) for element in elements
+                    ]
+                elif 'content' in data_types:
+                    # content 属性を抽出
+                    scraped_data[index] = [
+                        element.get('content', '') for element in elements
+                    ]
                 else:
                     # テキストのみを抽出
-                    scraped_data[index] = [element.get_text(strip=True).encode('utf-8').decode('utf-8') for element in elements]
+                    scraped_data[index] = [
+                        element.get_text(strip=True).encode('utf-8').decode('utf-8') for element in elements
+                    ]
             else:
                 # セレクタに該当する要素が無い場合は空文字列を追加
                 scraped_data[index] = ['nodata']

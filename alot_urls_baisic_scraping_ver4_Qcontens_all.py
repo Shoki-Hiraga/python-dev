@@ -16,10 +16,10 @@ file_name = "scraped_data.csv"
 output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
-header_row = ['URL', '買取実績', '買取相場', 'テキストコンテンツ', 'お客様の声']
+header_row = ['URL', '買取実績', '買取相場', 'テキストコンテンツ', 'お客様の声', 'indexチェック']
     
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
-csv_delimiter='★'
+csv_delimiter=','
 
 
 # ＝＝＝＝＝＝＝＝＝＝ページネーションURLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
@@ -42,9 +42,9 @@ CSS_selectors = [
     ('p.maker__results__description', 'text'),  
     ('h2.c-marketprice__title', 'text'),  
     ('div.c-content__inner', 'text'),
-    ('h2.c-reviews__title', 'text')
-    # # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
-    # ('.basePrice__content', 'text'),  
+    ('h2.c-reviews__title', 'text'),
+    ('meta[name="robots"]', 'attr', 'content')
+    # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
     # ('div.cassetteWrap:nth-of-type(n+3) dt:-soup-contains("走行距離") + dd', 'text'),  
     # ('dt:-soup-contains("年式") + .specList__data span.specList__emphasisData', 'text'),  
     # ('.carListWrap dt:-soup-contains("修復歴") + dd', 'text')  
