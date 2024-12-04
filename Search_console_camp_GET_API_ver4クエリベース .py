@@ -83,7 +83,7 @@ try:
             csv_writer = csv.writer(csvfile)
 
             if not search_query_data:  # データがない場合
-                csv_writer.writerow([original_query, '0', '0', '0', '0'])
+                csv_writer.writerow([original_query, 'not-URLS', '0', '0', '0'])
                 # worksheet.append_row([original_query, '0', '0', '0', '0'])
 
                 print(f'検索クエリ: {original_query}, データがありません')

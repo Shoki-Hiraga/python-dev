@@ -76,7 +76,7 @@ try:
         print(f"取得したリンク: {links}")
 
         # 少し待機して次の検索へ
-        time.sleep(2)
+        time.sleep(3)
 
 finally:
     # ブラウザを閉じる

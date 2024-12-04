@@ -26,8 +26,8 @@ service = build('webmasters', api_version, credentials=credentials)
 # 検索クエリに一致したデータを取得する関数を定義します
 def get_search_query_data(site_url, query):
     request = {
-        'startDate': '2023-04-01',
-        'endDate': '2024-08-31',
+        'startDate': '2024-11-15',
+        'endDate': '2024-11-25',
         'dimensions': ['query', 'page'],  # dimensionsに'page'を追加
         'searchType': 'web',
         'dimensionFilterGroups': [{
@@ -66,7 +66,7 @@ try:
         search_query_data, original_query = get_search_query_data(site_url, query)
 
         # ランダムな遅延処理を追加
-        delay = random.uniform(1.5, 3.5)
+        delay = random.uniform(1.0, 2.5)
         print(f'遅延処理 {delay} 秒')
         time.sleep(delay)
 
@@ -75,7 +75,7 @@ try:
             csv_writer = csv.writer(csvfile)
 
             if not search_query_data:  # データがない場合
-                csv_writer.writerow([original_query, '0', '0', '0', '0'])
+                csv_writer.writerow([original_query, 'not-URLS', '0', '0', '0'])
                 # worksheet.append_row([original_query, '0', '0', '0', '0'])
 
                 print(f'検索クエリ: {original_query}, データがありません')

@@ -2,7 +2,7 @@ from setting_file.header import *
 from alot_urls_scraping_main import alot_urls_scraping
 # ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
 # 個別URLリスト
-from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
+from setting_file.scraping_url.Qcarpage_all_contents_url_copy2 import URLS
 
 scraping_func_instance = alot_urls_scraping
 ()
@@ -12,7 +12,7 @@ delay_time_set = random.uniform(000.1, 000.2)
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
-file_name = "scraped_data1.csv"
+file_name = "scraped_data3.csv"
 output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
