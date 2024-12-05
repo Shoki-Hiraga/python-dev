@@ -36,6 +36,7 @@ import google_auth_oauthlib.flow
 from google.ads.googleads.client import GoogleAdsClient
 from selenium.webdriver.common.action_chains import ActionChains
 import file_path
+from playwright.sync_api import sync_playwright
 from urllib.parse import urlparse
 from setting_file.user_agent import user_agents  # ユーザーエージェントのリストをインポート
 from setting_file import csv_output_path, gcp_api, api_json, api_yaml  # 設定ファイルからCSVの出力パスとAPIのJSONをインポート
