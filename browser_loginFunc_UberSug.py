@@ -1,12 +1,13 @@
 from setting_file.header import *
 from setting_file.browser_login.login_id_password import id, password
+from setting_file.scraping_url.browser_scraping_url_login import URLS
 
 # ヘッドレスモードの指定
 headlessmode = False
 
 # ファイル保存ディレクトリを指定
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
-file_name = "domain_rank.csv"
+file_name = "domain_rank_uber.csv"
 output_file = os.path.join(file_directory, file_name)
 
 
@@ -22,11 +23,7 @@ time.sleep(3)
 # ログイン後の操作URL
 post_login_url = "https://app.neilpatel.com/ja/seo_analyzer/backlinks/" 
 input_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-ctluuY.kXMBUa > form > div.sc-hqUaMi.bmEEnm > input"                  # inputフィールドのCSSセレクタ
-input_data_list = [
-    "https://qsha-oh.com/",
-    "https://www.gaisha-oh.com/",
-    "https://www.currentmotor.co.jp/"
-    ]
+input_data_list = URLS
 
 # ボタンのCSSセレクタ
 button_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-ctluuY.kXMBUa > form > button"
@@ -38,6 +35,8 @@ data_selectors = [
     "div.sc-iBUNwL:nth-of-type(3) div:nth-of-type(2)"
 ]
 
+
+
 def scrape_with_playwright(login_url, user_id_selector, password_selector, user_id, password,
                            post_login_url, input_selector, input_data_list, button_selector,
                            data_selectors, output_file):
@@ -48,14 +47,14 @@ def scrape_with_playwright(login_url, user_id_selector, password_selector, user_
 
         try:
             # ログイン処理
-            print("ログイン処理を開始します...")
+            print("ログイン処理を開始...")
             page.goto(login_url)
             page.fill(user_id_selector, user_id)
             page.fill(password_selector, password)
             time.sleep(2)
             page.press(password_selector, "Enter")  # Enterキーを押す
-            time.sleep(3)
-            print("ログイン処理が完了しました。")
+            time.sleep(1)
+            print("ログイン完了")
 
             # 操作処理
             print("操作処理を実行します...")
@@ -64,7 +63,7 @@ def scrape_with_playwright(login_url, user_id_selector, password_selector, user_
             results = []
 
             for data in input_data_list:
-                time.sleep(5)
+                time.sleep(3)
                 # 入力
                 print(f"データを入力: {data}")
                 page.fill(input_selector, data)
@@ -101,8 +100,8 @@ def scrape_with_playwright(login_url, user_id_selector, password_selector, user_
 
         finally:
             # ブラウザを閉じる
-            browser.close()
-            print("ブラウザを閉じました。")
+            # browser.close()
+            print("処理完了")
 
         # CSVにデータを保存
         print("CSVファイルにデータを保存します...")
