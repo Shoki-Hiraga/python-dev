@@ -66,7 +66,6 @@ completed_count = 0
 
 # CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込む
 from Main_CsvWrite import CsvWriter
-csv_writer = CsvWriter(output_file, header_row, delimiter=csv_delimiter)
 # CsvWriterのインスタンス生成
 csv_writer = CsvWriter(output_file, header_row, delimiter=csv_delimiter)
 # CSV書き込み処理の呼び出し
