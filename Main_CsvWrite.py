@@ -22,21 +22,52 @@ class CsvWriter:
             csv_writer.writerow(self.header_row)
 
             with concurrent.futures.ThreadPoolExecutor() as executor:
+                futures = []
                 for url in urls:
-                    # スクレイピングを実行
-                    result = scraping_func.scrape_url(url, css_selectors, delay_time)
-                    url, scraped_data, status_code = result
-                    max_length = max(len(data) for data in scraped_data)  # 最大の列数を取得
+                    # スクレイピングタスクを非同期で実行
+                    futures.append(
+                        executor.submit(scraping_func.scrape_url, url, css_selectors, delay_time)
+                    )
 
-                    # データをCSVに書き込む
-                    for i in range(max_length):
-                        row_data = [url] + [data[i] if i < len(data) else '' for data in scraped_data] + [status_code]
+                for future in concurrent.futures.as_completed(futures):
+                    try:
+                        result = future.result()  # スクレイピング結果を取得
+                        url, scraped_data, status_code = result
+
+                        # ステータスコードをチェック
+                        if status_code != 200:
+                            logging.error(f"Failed to retrieve URL: {url} (Status code: {status_code})")
+                            # 各列にエラーコードを記録
+                            row_data = [url] + [str(status_code) for _ in self.header_row[1:]]
+                            csv_writer.writerow(row_data)
+                            continue
+
+                        # データが空の場合の処理
+                        if not scraped_data:
+                            logging.warning(f"No data scraped from URL: {url}")
+                            # 各列に空のデータとステータスコードを記録
+                            row_data = [url] + ['' for _ in self.header_row[1:]]
+                            csv_writer.writerow(row_data)
+                            continue
+
+                        # 最大列数を取得（エラー回避のため安全に実行）
+                        max_length = max((len(data) for data in scraped_data), default=0)
+
+                        # データをCSVに書き込む
+                        for i in range(max_length):
+                            row_data = [url] + [data[i] if i < len(data) else '' for data in scraped_data]
+                            csv_writer.writerow(row_data)
+
+                    except Exception as e:
+                        logging.error(f"Error processing URL: {future}, {e}", exc_info=True)
+                        # 例外発生時も各列にエラーコードを記録
+                        row_data = [url] + [str(e)] * len(self.header_row[1:])
                         csv_writer.writerow(row_data)
 
                     # 進捗をログ出力
                     completed_count += 1
                     log_progress(completed_count, len(urls))
-                    
+
                     # 各URLごとの進捗ログ
                     print(f"{self.header_row[0]}: {url}")
                     print("--------------------------------------------")

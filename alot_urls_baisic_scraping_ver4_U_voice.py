@@ -53,7 +53,7 @@ def log_progress(completed_count, total_count):
 completed_count = 0
 
 
-# CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込む
+# CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込み、ログを出力
 from Main_CsvWrite import CsvWriter
 # CsvWriterのインスタンス生成
 csv_writer = CsvWriter(output_file, header_row, delimiter=csv_delimiter)

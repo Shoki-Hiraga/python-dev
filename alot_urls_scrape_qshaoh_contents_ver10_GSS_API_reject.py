@@ -92,7 +92,7 @@ def log_progress(completed_count, total_count):
 # 完了したURLの数
 completed_count = 0
 
-# CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込む
+# CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込み、ログを出力
 with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(header_row)
