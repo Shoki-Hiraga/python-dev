@@ -15,7 +15,7 @@ output_file = os.path.join(csv_directory, csv_filename)
 # スプレッドシート設定
 # worksheet = gc.open("pythonscrape").sheet1
 
-# 個別URLリスト
+# 個別URLリストインスタンス
 from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
 
 

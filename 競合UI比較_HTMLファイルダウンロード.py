@@ -3,7 +3,7 @@ from setting_file.header import *
 # ファイルパス
 file_directory = file_path.file_directory  # file_path.pyで定義したファイルディレクトリを指定
 
-# 個別URLリスト
+# 個別URLリストインスタンス
 urls = [
 "https://www.qsha-oh.com/maker/nissan/skyline/",
 "https://ucarpac.com/sell/m002/n027",

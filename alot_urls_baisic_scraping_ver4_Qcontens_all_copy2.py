@@ -1,15 +1,15 @@
 from setting_file.header import *
 
 # スクレイピング遅延処理
-delay_time_set = random.uniform(3.1, 5.2)
+delay_time_set = random.uniform(000.1, 000.2)
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
-file_name = "scraped_data.csv"
+file_name = "scraped_data3.csv"
 output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
-header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(basePrice__content)', '走行距離', '年式(specList__jpYear)', '修復歴']
+header_row = ['URL', '買取実績', '買取相場', 'テキストコンテンツ', 'お客様の声', 'indexチェック']
     
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
@@ -27,20 +27,19 @@ csv_delimiter='★'
 
 # ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
 # 個別URLリストインスタンス
-from setting_file.scraping_url.basic_scraping_url import URLS
+from setting_file.scraping_url.Qcarpage_all_contents_url_copy2 import URLS
 for url in URLS:
     # URLを使った処理
     print(f"Scraping {url}...")
 
-
 # CSSセレクタの配列
 CSS_selectors = [
-    ('#app > div.model > section.c-marketprice', 'text'),  
-    ('#app > div.model > section.c-content', 'text'),  
-    # ('.cassetteMain__title a', 'text'),
-    # # ('.cassetteMain__title a', 'link'),  # リンクを取得する場合
-    # # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
-    # ('.basePrice__content', 'text'),  
+    ('p.maker__results__description', 'text'),  
+    ('h2.c-marketprice__title', 'text'),  
+    ('div.c-content__inner', 'text'),
+    ('h2.c-reviews__title', 'text'),
+    ('meta[name="robots"]', 'attr', 'content')
+    # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
     # ('div.cassetteWrap:nth-of-type(n+3) dt:-soup-contains("走行距離") + dd', 'text'),  
     # ('dt:-soup-contains("年式") + .specList__data span.specList__emphasisData', 'text'),  
     # ('.carListWrap dt:-soup-contains("修復歴") + dd', 'text')  
@@ -48,7 +47,6 @@ CSS_selectors = [
 
 # アクセスエラー発生時の最大リトライ回数を設定
 MAX_RETRIES = 10
-
 
 # Mainスクレイピングのインスタンス化
 from Main_alot_urls_scraping import alot_urls_scraping

@@ -24,7 +24,7 @@ pagenation_max = 4
 # base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
 # urls = [base_url.format(i) + parameter for i in range(pagenation_min, pagenation_max + 1)]
 
-# 個別URLリスト
+# 個別URLリストインスタンス
 urls = [
 'https://www.qsha-oh.com/maker/nissan/silvia_s14/',
 'https://www.qsha-oh.com/maker/nissan/cherry/',

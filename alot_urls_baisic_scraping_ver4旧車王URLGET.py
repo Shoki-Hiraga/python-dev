@@ -1,11 +1,4 @@
 from setting_file.header import *
-from alot_urls_scraping_main import alot_urls_scraping
-# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
-# 個別URLリスト
-from setting_file.scraping_url.basic_scraping_url import URLS
-
-scraping_func_instance = alot_urls_scraping
-()
 
 # スクレイピング遅延処理
 delay_time_set = random.uniform(00.1, 00.2)
@@ -22,16 +15,19 @@ header_row = ['URL', 'メーカー', '車種タイトル', '車輌本体価格(b
 csv_delimiter='★'
 
 
-# ＝＝＝＝＝＝＝＝＝＝ページネーションURLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
-# # パラメータの設定
-# parameter = "" # パラメーター無しの場合は空白
+# # ページネーションURLインスタンス
+# from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
+# base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
+# parameter = ""  # パラメーター無し
 # pagenation_min = 1
 # pagenation_max = 4
+# url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
+# URLS = url_generator.generate_urls()  # URLリストを生成
 
-# # URLリストの生成
-# base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
-# URLS = [base_url.format(i) + parameter for i in range(pagenation_min, pagenation_max + 1)]
 
+# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
+# 個別URLリストインスタンス
+from setting_file.scraping_url.basic_scraping_url import URLS
 for url in URLS:
     # URLを使った処理
     print(f"Scraping {url}...")
@@ -52,6 +48,10 @@ CSS_selectors = [
 # アクセスエラー発生時の最大リトライ回数を設定
 MAX_RETRIES = 10
 
+# Mainスクレイピングのインスタンス化
+from Main_alot_urls_scraping import alot_urls_scraping
+scraping_func_instance = alot_urls_scraping
+()
 scraping_func_instance.scrape_url(url, CSS_selectors, delay_time_set)
 
 # スクレイピングの進捗をログに記録する関数
@@ -63,27 +63,9 @@ def log_progress(completed_count, total_count):
 completed_count = 0
 
 # CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込む
-with open(output_file, mode='w', newline='', encoding='utf-8') as csv_file:
-    csv_writer = csv.writer(csv_file, delimiter = csv_delimiter)
-    csv_writer.writerow(header_row)
-
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        # URLリストに対して並行してスクレイピングを実行
-        for url in URLS:
-            result = scraping_func_instance.scrape_url(url, CSS_selectors, delay_time_set)  # 各URLに対してスクレイピングを実行
-            url, scraped_data, status_code = result
-            max_length = max(len(data) for data in scraped_data)  # 最大の列数を取得
-            
-            # スクレイプしたデータを行としてCSVに書き込む
-            for i in range(max_length):
-                row_data = [url] + [data[i] if i < len(data) else '' for data in scraped_data] + [status_code]
-                csv_writer.writerow(row_data)
-
-            completed_count += 1  # 完了したURLの数を更新
-            log_progress(completed_count, len(URLS))  # 進捗のログ
-
-            print(f'{header_row[0]}: {url}')  # 完了したURLを表示
-            print(' ')
-            print('--------------------------------------------')
-
-print('スクレイピングが完了しました。')  # 全てのスクレイピングが完了したことを通知
+from Main_CsvWrite import CsvWriter
+csv_writer = CsvWriter(output_file, header_row, delimiter=csv_delimiter)
+# CsvWriterのインスタンス生成
+csv_writer = CsvWriter(output_file, header_row, delimiter=csv_delimiter)
+# CSV書き込み処理の呼び出し
+csv_writer.write_to_csv(URLS, scraping_func_instance, CSS_selectors, delay_time_set, log_progress)

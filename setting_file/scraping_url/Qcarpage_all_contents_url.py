@@ -88,7 +88,7 @@ URLS = [
 "https://www.qsha-oh.com/maker/toyota/supra/",
 "https://www.qsha-oh.com/maker/toyota/sera/",
 "https://www.qsha-oh.com/maker/toyota/daruma-selica/",
-"https://www.qsha-oh.com/maker/toyota/celica-1600gtv/",
+"https://www.qsha-oh.com/maker/toyota/1600gtv/",
 "https://www.qsha-oh.com/maker/toyota/celica_gt-four/",
 "https://www.qsha-oh.com/maker/toyota/celica-gt-four-st185h/",
 "https://www.qsha-oh.com/maker/toyota/celica-gt-four-st205/",

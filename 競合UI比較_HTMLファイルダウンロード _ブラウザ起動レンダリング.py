@@ -10,7 +10,7 @@ driver = webdriver.Chrome(options=options)
 # ファイルパス
 file_directory = file_path.file_directory
 
-# 個別URLリスト
+# 個別URLリストインスタンス
 urls = [
 "https://www.qsha-oh.com/maker/nissan/skyline/",
 "https://ucarpac.com/sell/m002/n027",

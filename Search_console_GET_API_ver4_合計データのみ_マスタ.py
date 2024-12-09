@@ -1,5 +1,5 @@
 from setting_file.header import *
-# 個別URLリスト
+# 個別URLリストインスタンス
 from setting_file.Search_Console_set.url_base_master_total import URLS
 
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
