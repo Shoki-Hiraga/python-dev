@@ -5,7 +5,7 @@ delay_time_set = random.uniform(000.1, 000.2)
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
-file_name = "scraped_data1.csv"
+file_name = "scraped_data_Uvoice.csv"
 output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
