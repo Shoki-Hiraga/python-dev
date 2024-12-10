@@ -28,8 +28,8 @@ service = build('webmasters', api_version, credentials=credentials)
 # 指定したURLに一致したデータを取得する関数を定義します
 def get_search_url_data(site_url, page_url):
     request = {
-        'startDate': '2024-11-15',
-        'endDate': '2024-11-25',
+        'startDate': '2024-10-01',
+        'endDate': '2024-11-31',
         'dimensions': ['page'],
         'searchType': 'web',
         'dimensionFilterGroups': [{
@@ -62,7 +62,7 @@ try:
             search_url_data, original_url = get_search_url_data(site_url, url)
 
             # ランダムな遅延処理を追加
-            delay = random.uniform(3.0, 4.0)
+            delay = random.uniform(1.0, 2.5)
             print(f'遅延処理 {delay} 秒')
             time.sleep(delay)
 

@@ -13,6 +13,8 @@ import pytesseract
 import pdfplumber
 import base64
 import difflib
+import whisper
+import json
 from PIL import Image
 from io import BytesIO
 from google.cloud import vision
