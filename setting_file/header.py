@@ -15,6 +15,7 @@ import base64
 import difflib
 import whisper
 import json
+from datetime import datetime
 from PIL import Image
 from io import BytesIO
 from google.cloud import vision
