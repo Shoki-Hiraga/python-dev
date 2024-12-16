@@ -27,11 +27,11 @@ input_data_list = Query
 # 検索ボタン
 button1_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hHrewP.fmuwcY > div > form > button"
 # 全て見るリンク
-button2_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hsUFQk.ftRXj > div.sc-gVaSRo.hGbtHH > div:nth-child(1) > div > div.sc-fGQXPE.jvHNGa > div.sc-dErQpc.MzgTL > a"
+button2_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hMxIkD.eRppkS > div.sc-gVaSRo.hGbtHH > div:nth-child(1) > div > div.sc-fGQXPE.jvHNGa > div.sc-dErQpc.MzgTL > a"
 # CSVで出力プルダウン
-button3_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hsUFQk.ftRXj > div.sc-ejfMa-d.fzynVw > div > div:nth-child(1) > div > div.sc-dNsVcS.Ypikc > div > div:nth-child(1)"
+button3_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hMxIkD.eRppkS > div.sc-eSfNbN.dRBNRG > div > div:nth-child(1) > div > div.sc-jwWbkn.gheJca > div > div:nth-child(1) > div > button"
 # 全てをエクスポート
-button4_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hsUFQk.ftRXj > div.sc-ejfMa-d.fzynVw > div > div:nth-child(1) > div > div.sc-dNsVcS.Ypikc > div > div:nth-child(1) > div.sc-cAXmzm.iwPgUw > div.sc-kTYlsj.bEUTMu"
+button4_selector = "#root > div.sc-cDJyZ.kYIeNi > div.sc-eODrEC.jqOJAq > div.sc-gvvZcT.iDDjNW > div > div > div.sc-hMxIkD.eRppkS > div.sc-eSfNbN.dRBNRG > div > div:nth-child(1) > div > div.sc-jwWbkn.gheJca > div > div:nth-child(1) > div.sc-cAXmzm.iwPgUw > div.sc-kTYlsj.bEUTMu > div"
 
 # def process_element(page, selector, save_path=None):
 

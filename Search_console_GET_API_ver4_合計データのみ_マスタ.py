@@ -1,6 +1,5 @@
 from setting_file.header import *
-# 個別URLリストインスタンス
-from setting_file.Search_Console_set.url_base_master_total import URLS
+
 
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
 file_name = "Search Console_API_URL.csv"
@@ -56,7 +55,8 @@ try:
         csv_writer = csv.writer(csvfile)
         # ヘッダー行を書き込む
         csv_writer.writerow(header_row)
-
+        # 個別URLリストインスタンス
+        from setting_file.Search_Console_set.url_base_master_total import URLS
         for url in URLS:
             # URLの統計情報を取得
             search_url_data, original_url = get_search_url_data(site_url, url)
