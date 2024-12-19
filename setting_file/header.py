@@ -16,6 +16,7 @@ import difflib
 import whisper
 import json
 import calendar
+from urllib.parse import urljoin
 from datetime import datetime, timedelta
 from datetime import datetime
 from PIL import Image
