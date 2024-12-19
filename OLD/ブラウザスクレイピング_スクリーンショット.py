@@ -131,7 +131,7 @@ def take_full_page_screenshot(url, output_directory):
     print(f"フルページスクリーンショットを保存しました: {output_file}")
 
 # ファイル保存ディレクトリを指定
-file_directory = file_path.file_directory
+file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
 
 # スクリーンショットを取得するURLのリスト
 for url in URLS:

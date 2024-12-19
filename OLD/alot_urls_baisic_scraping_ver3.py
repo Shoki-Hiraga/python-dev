@@ -4,7 +4,7 @@ from setting_file.header import *
 from setting_file.scraping_url.basic_scraping_url import URLS
 
 # ファイルパス
-file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
+file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定 # file_path.py で定義したファイルディレクトリを指定
 file_name = "scraped_data.csv"
 output_file = os.path.join(file_directory, file_name)
 

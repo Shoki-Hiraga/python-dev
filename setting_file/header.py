@@ -41,7 +41,7 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 from google.ads.googleads.client import GoogleAdsClient
 from selenium.webdriver.common.action_chains import ActionChains
-import file_path
+import setting_file.file_path as file_path
 from playwright.sync_api import sync_playwright
 from urllib.parse import urlparse
 from setting_file.user_agent import user_agents  # ユーザーエージェントのリストをインポート

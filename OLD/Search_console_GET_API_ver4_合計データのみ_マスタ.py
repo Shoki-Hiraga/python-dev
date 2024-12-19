@@ -1,7 +1,7 @@
 from setting_file.header import *
 
 
-file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
+file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定 # file_path.py で定義したファイルディレクトリを指定
 file_name = "Search Console_API_URL.csv"
 output_file = os.path.join(file_directory, file_name)
 

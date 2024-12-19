@@ -12,7 +12,7 @@ headers = {'User-Agent': user_agent}
 delay_time_set = random.uniform(000.1, 000.2)
 
 # ファイルパス
-file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
+file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定 # file_path.py で定義したファイルディレクトリを指定
 file_name = "ad_search_results.csv"
 output_file = os.path.join(file_directory, file_name)
 
