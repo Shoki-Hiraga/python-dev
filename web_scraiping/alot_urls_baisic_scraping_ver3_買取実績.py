@@ -15,26 +15,34 @@ header_row = ['URL', '買取実績', 'ステータス']
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
 
-# # ページネーションURLインスタンス
-# from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
-# base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
-# parameter = ""  # パラメーター無し
-# pagenation_min = 1
-# pagenation_max = 4
-# url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
-# URLS = url_generator.generate_urls()  # URLリストを生成
+# URL設定のインポート
+from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
+from setting_file.scraping_url.basic_scraping_url import URLS as IndividualURLS
 
+# URL設定を選択する変数（1: ページネーション, 2: 個別URL）
+url_setting_index = 2  # 1 または 2 に変更して切り替え
 
+# ページネーション用URLの生成関数
+def generate_pagination_urls():
+    base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
+    parameter = ""  # パラメーター無し
+    pagenation_min = 1
+    pagenation_max = 4
+    url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
+    return url_generator.generate_urls()
 
-# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
-# 個別URLリストインスタンス
-from setting_file.scraping_url.Qcarpage_kaitori_ruslut import URLS
+# URL設定
+url_Settings = {
+    1: generate_pagination_urls,  # ページネーション用URL生成関数
+    2: lambda: IndividualURLS      # 個別URLリスト
+}
+
+# URLリストの取得（関数呼び出しで取得）
+URLS = url_Settings[url_setting_index]()  
+
+# URLリストの処理
 for url in URLS:
-    # URLを使った処理
     print(f"Scraping {url}...")
-
-# スクレイピング遅延処理
-delay_time_set = random.uniform(000.1, 000.2)
 
 # CSSセレクタの配列
 CSS_selectors = [
@@ -46,7 +54,7 @@ CSS_selectors = [
 MAX_RETRIES = 10
 
 # Mainスクレイピングのインスタンス化
-from Main.Main.Main_alot_urls_scraping import alot_urls_scraping
+from Main.Main_alot_urls_scraping import alot_urls_scraping
 scraping_func_instance = alot_urls_scraping
 ()
 scraping_func_instance.scrape_url(url, CSS_selectors, delay_time_set)
@@ -60,7 +68,7 @@ def log_progress(completed_count, total_count):
 completed_count = 0
 
 # CSVファイルを開き、ヘッダーとスクレイプしたデータを書き込み、ログを出力
-from Main.Main.Main_CsvWrite import CsvWriter
+from Main.Main_CsvWrite import CsvWriter
 # CsvWriterのインスタンス生成
 csv_writer = CsvWriter(output_file, header_row, delimiter=csv_delimiter)
 # CSV書き込み処理の呼び出し

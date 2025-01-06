@@ -17,19 +17,33 @@ header_row = ['URL', 'お客様の声', 'ページネーション有無']
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
 
-# # ページネーションURLインスタンス
-# from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
-# base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
-# parameter = ""  # パラメーター無し
-# pagenation_min = 1
-# pagenation_max = 4
-# url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
-# URLS = url_generator.generate_urls()  # URLリストを生成
+# URL設定のインポート
+from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
+from setting_file.scraping_url.basic_scraping_url import URLS as IndividualURLS
 
-# 個別URLリストインスタンス
-from setting_file.scraping_url.Q_Uvoicepage_all_contents_url import URLS
+# URL設定を選択する変数（1: ページネーション, 2: 個別URL）
+url_setting_index = 2  # 1 または 2 に変更して切り替え
+
+# ページネーション用URLの生成関数
+def generate_pagination_urls():
+    base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
+    parameter = ""  # パラメーター無し
+    pagenation_min = 1
+    pagenation_max = 4
+    url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
+    return url_generator.generate_urls()
+
+# URL設定
+url_Settings = {
+    1: generate_pagination_urls,  # ページネーション用URL生成関数
+    2: lambda: IndividualURLS      # 個別URLリスト
+}
+
+# URLリストの取得（関数呼び出しで取得）
+URLS = url_Settings[url_setting_index]()  
+
+# URLリストの処理
 for url in URLS:
-    # URLを使った処理
     print(f"Scraping {url}...")
 
 # CSSセレクタの配列

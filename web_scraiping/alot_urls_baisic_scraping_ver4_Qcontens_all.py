@@ -18,24 +18,34 @@ header_row = ['URL', '買取実績', '買取相場', 'テキストコンテン�
 csv_delimiter='★'
 
 
-# # ページネーションURLインスタンス
-# from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
-# base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
-# parameter = ""  # パラメーター無し
-# pagenation_min = 1
-# pagenation_max = 4
-# url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
-# URLS = url_generator.generate_urls()  # URLリストを生成
+# URL設定のインポート
+from setting_file.scraping_url_Param_or_page.Page_Param import PageParamUrlGenerator
+from setting_file.scraping_url.basic_scraping_url import URLS as IndividualURLS
 
+# URL設定を選択する変数（1: ページネーション, 2: 個別URL）
+url_setting_index = 2  # 1 または 2 に変更して切り替え
 
+# ページネーション用URLの生成関数
+def generate_pagination_urls():
+    base_url = "https://www.carsensor.net/usedcar/bNI/s054/index{}.html"
+    parameter = ""  # パラメーター無し
+    pagenation_min = 1
+    pagenation_max = 4
+    url_generator = PageParamUrlGenerator(base_url, parameter, pagenation_min, pagenation_max)
+    return url_generator.generate_urls()
 
-# ＝＝＝＝＝＝＝＝＝＝個別URLでスクレイピングする時＝＝＝＝＝＝＝＝＝＝
-# 個別URLリストインスタンス
-from setting_file.scraping_url.Qcarpage_all_contents_url import URLS
+# URL設定
+url_Settings = {
+    1: generate_pagination_urls,  # ページネーション用URL生成関数
+    2: lambda: IndividualURLS      # 個別URLリスト
+}
+
+# URLリストの取得（関数呼び出しで取得）
+URLS = url_Settings[url_setting_index]()  
+
+# URLリストの処理
 for url in URLS:
-    # URLを使った処理
     print(f"Scraping {url}...")
-
 
 # CSSセレクタの配列
 CSS_selectors = [
