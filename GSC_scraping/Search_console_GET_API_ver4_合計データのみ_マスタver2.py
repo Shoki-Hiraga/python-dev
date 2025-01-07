@@ -2,6 +2,8 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
+from setting_file.Search_Console_set.url_base_master_total import URLS as Individual_urls
+
 from datetime import datetime, timedelta
 import calendar
 
@@ -16,23 +18,31 @@ delay_set = random.uniform(1.0, 2.5)
 site_url = 'https://www.qsha-oh.com/'
 
 # 日付セット
-start_date_set = '2024-09-01'
-end_date_set = '2024-11-01'
+start_date_set = '2024-12-01'
+end_date_set = '2024-12-31'
 
-## 週毎、月毎、指定した日付のみ、のデータ取得を指定
-# interval_getdata_set = 'weekly'
-interval_getdata_set = 'monthly'
-# interval_getdata_set = 'none'
+# 週毎、月毎、指定した日付のみ、のデータ取得を指定
+interval_getdata_index = 2
+# 設定index
+interval_getdata_set_Wek = 'weekly'
+interval_getdata_set_Mon = 'monthly'
+interval_getdata_Indexs = {
+    1:interval_getdata_set_Wek,
+    2:interval_getdata_set_Mon,
+    }
+interval_getdata_set = interval_getdata_Indexs[interval_getdata_index]
 
 # 一致条件
+search_ops_index = 1
+# 設定index
 operator_Equ = 'equals'  # 完全一致
 operator_Con = 'contains'  # 部分一致
-search_ops_index = 1
 search_ops_Indexs = {
     1:operator_Equ,
     2:operator_Con
     }
-search_ops = search_ops_Indexs[search_ops_index]
+search_ops_set = search_ops_Indexs[search_ops_index]
+
 
 # JSONファイルのパスを指定
 SERVICE_ACCOUNT_FILE = api_json.qsha_oh
@@ -87,8 +97,7 @@ def get_search_url_data(site_url, page_url, start_date, end_date):
         'dimensionFilterGroups': [{
             'filters': [{
                 'dimension': 'page',
-                # 'operator': 'equals',  # 完全一致
-                'operator': 'contains',  # 部分一致
+                'operator': search_ops_set,
                 'expression': page_url
             }]
         }]
@@ -108,13 +117,10 @@ def main(start_date, end_date, interval_getdata):
             # ヘッダー行を書き込む
             csv_writer.writerow(header_row)
 
-            # 個別URLリストインスタンス
-            from setting_file.Search_Console_set.url_base_master_total import URLS
-
             # 日付範囲を生成
             date_ranges = generate_date_ranges(start_date, end_date, interval_getdata)
 
-            for url in URLS:
+            for url in Individual_urls:
                 for start_date, end_date in date_ranges:
                     # URLの統計情報を取得
                     search_url_data, original_url = get_search_url_data(site_url, url, start_date, end_date)
