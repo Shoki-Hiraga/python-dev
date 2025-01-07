@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
 from datetime import datetime, timedelta
 import calendar
@@ -21,7 +24,15 @@ end_date_set = '2024-11-01'
 interval_getdata_set = 'monthly'
 # interval_getdata_set = 'none'
 
-
+# 一致条件
+operator_Equ = 'equals'  # 完全一致
+operator_Con = 'contains'  # 部分一致
+search_ops_index = 1
+search_ops_Indexs = {
+    1:operator_Equ,
+    2:operator_Con
+    }
+search_ops = search_ops_Indexs[search_ops_index]
 
 # JSONファイルのパスを指定
 SERVICE_ACCOUNT_FILE = api_json.qsha_oh
