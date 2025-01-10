@@ -5,12 +5,14 @@ from setting_file.header import *
 # 設定方法
 # https://docs.google.com/document/d/1U4HWFDTHMAbTCl6SZuajYDMqsog5DUf7Ytpe1Acm0mE/edit?tab=t.0
 
+# 個別URLリストインスタンス
+from setting_file.scraping_KW.ads_api_KW import search_keywords_list
 
 # Google Adsクライアントの初期化
 client = GoogleAdsClient.load_from_storage(api_yaml.current)
 client_id = "2973188677"
 # 遅延処理
-deley_time = 3
+deley_time = 3.4
 
 # ファイルパス
 file_directory = file_path.file_directory # file_path.py で定義したファイルディレクトリを指定
@@ -20,13 +22,6 @@ output_file = os.path.join(file_directory, file_name)
 # CSVのヘッダーを更新
 header_row = [
     'Keyword', '月間平均ボリューム', '競合指標', '競合レベル', '低額CPC', '高額CPC'
-]
-
-# キーワードリストの例
-keyword_list = [
-"100万円 車 売却価格",
-"車検証 紛失 廃車",
-"車 一括 査定 やめた ほうが いい"
 ]
 
 def get_keyword_ideas(client, customer_id, keyword_texts):
@@ -76,7 +71,7 @@ with open(output_file, mode='w', newline='', encoding='utf-8') as csvfile:
     writer.writeheader()
 
     # キーワードリストを元にリクエストを送信し、3秒の遅延を追加
-    for keyword in keyword_list:
+    for keyword in search_keywords_list:
         data = get_keyword_ideas(client, client_id, [keyword])
 
         # データの書き込み
