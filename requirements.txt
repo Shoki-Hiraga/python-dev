@@ -1,0 +1,26 @@
+# pip install -r requirements.txt
+
+requests
+beautifulsoup4
+gspread
+pandas
+pytesseract
+pdfplumber
+base64
+difflib
+json
+calendar
+pillow
+selenium
+webdriver_manager
+google-cloud-vision
+google-cloud-storage
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+oauth2client
+google-ads
+playwright
+mysql-connector-python
+python-dotenv
