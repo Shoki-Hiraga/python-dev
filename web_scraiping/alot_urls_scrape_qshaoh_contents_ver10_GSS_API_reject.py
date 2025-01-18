@@ -1,4 +1,8 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
+
 
 # ファイルパス
 csv_directory = csv_output_path.out_office
