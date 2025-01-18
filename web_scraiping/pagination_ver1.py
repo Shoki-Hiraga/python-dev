@@ -3,6 +3,8 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
 
+csvインポート機能は未実装
+
 # Define parameters
 website_url = "https://www.goo-net.com/"
 start_url = "https://www.goo-net.com/kaitori/maker_catalog/"
