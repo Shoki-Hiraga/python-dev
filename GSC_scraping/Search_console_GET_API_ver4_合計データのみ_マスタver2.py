@@ -2,7 +2,9 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
-from setting_file.Search_Console_set.url_base_master_total import URLS as Individual_urls
+# from setting_file.Search_Console_set.url_base_master_total import URLS as Individual_urls
+# from setting_file.Search_Console_set.qshaoh_index_url import URLS as Individual_urls
+from setting_file.Search_Console_set.qshaoh_noindex_url import URLS as Individual_urls
 
 from datetime import datetime, timedelta
 import calendar
@@ -18,8 +20,8 @@ delay_set = random.uniform(1.0, 2.5)
 site_url = 'https://www.qsha-oh.com/'
 
 # 日付セット
-start_date_set = '2024-12-01'
-end_date_set = '2024-12-31'
+start_date_set = '2025-01-01'
+end_date_set = '2025-01-31'
 
 # 週毎、月毎、指定した日付のみ、のデータ取得を指定
 interval_getdata_index = 2

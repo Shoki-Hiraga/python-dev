@@ -1574,12 +1574,7 @@ URLS = [
 # 'https://www.qsha-oh.com/usersvoice/donkervoort/s8/'
 ]
 
-
-
-
-
 URLS = [
-"https://www.qsha-oh.com/lpform/maker/nissan/r32-skyline/",
 "https://www.qsha-oh.com/maker/toyota/10-soarer/",
 "https://www.qsha-oh.com/maker/toyota/20-alphard/",
 "https://www.qsha-oh.com/maker/toyota/20-soarer/",
