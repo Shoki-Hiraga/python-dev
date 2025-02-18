@@ -1,3 +1,6 @@
 /setting_file/json_file
 /setting_file/yaml_file
 /setting_file/browser_login
+**/__pycache__/**
+__pycache__/
+claude_apikey.py

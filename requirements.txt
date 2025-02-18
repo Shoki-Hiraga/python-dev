@@ -24,3 +24,4 @@ google-ads
 playwright
 mysql-connector-python
 python-dotenv
+anthropic
