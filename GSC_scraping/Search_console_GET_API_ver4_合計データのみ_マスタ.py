@@ -12,7 +12,7 @@ header_row = ['URL', '合計表示回数', '合計クリック数', '平均CTR',
 
 
 # 対象のサイトURLを指定します
-site_url = 'https://www.gaisha-oh.com/'
+site_url = 'https://www.qsha-oh.com/'
 
 # JSONファイルのパスを指定
 SERVICE_ACCOUNT_FILE = api_json.qsha_oh
@@ -30,8 +30,8 @@ service = build('webmasters', api_version, credentials=credentials)
 # 指定したURLに一致したデータを取得する関数を定義します
 def get_search_url_data(site_url, page_url):
     request = {
-        'startDate': '2024-11-16',
-        'endDate': '2025-02-13',
+        'startDate': '2025-02-01',
+        'endDate': '2025-02-28',
         'dimensions': ['page'],
         'searchType': 'web',
         'dimensionFilterGroups': [{
