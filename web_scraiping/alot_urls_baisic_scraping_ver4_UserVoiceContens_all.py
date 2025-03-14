@@ -12,7 +12,7 @@ file_name = "scraped_data_UV.csv"
 output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
-header_row = ['URL', 'お客様車輌', 'お客様の声', 'ページネーション', 'indexチェック']
+header_row = ['URL', 'お客様車輌', 'indexチェック']
     
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
@@ -39,9 +39,7 @@ for url in URLS:
 
 # CSSセレクタの配列
 CSS_selectors = [
-    ('.p-usersvoice__title__text b', 'text'),  
-    ('p.p-usersvoice__voices__item__message__text:nth-of-type(1)', 'text'),  
-    ('.c-pagination__inner a', 'text'),
+    ('.p-usersvoice__title__text b', 'text'),
     ('meta[name="robots"]', 'attr', 'content')
     # ('.cassetteMain__title a', 'text', 'link'),  # リンクとテキストを同時に取得する場合
     # ('div.cassetteWrap:nth-of-type(n+3) dt:-soup-contains("走行距離") + dd', 'text'),  
