@@ -12,7 +12,7 @@ file_name = "scraped_data_SpoLab.csv"
 output_file = os.path.join(file_directory, file_name)
 
 # CSVヘッダー行の設定
-header_row = ['URL']
+header_row = ['URL', 'タイトル', '相場表', '実績カード', 'お客様の声', 'テキストコンテンツ']
     
 # CSVファイルの区切り文字を指定（デフォルトはカンマ）
 csv_delimiter='★'
@@ -49,8 +49,11 @@ for url in URLS:
 
 # CSSセレクタの配列
 CSS_selectors = [
+    ('title', 'text'),
     ('td:nth-of-type(3)', 'text'), 
-    ('asection.point', 'text'),     
+    ('span.results__h2-text', 'text'),
+    ('span.usersvoice__h2-text', 'text'),
+    ('div.point__block:nth-of-type(1) span.point__h3-text', 'text'),
     # ('a.models__item', 'text', 'link'),  # リンクとテキストを同時に取得する場合
 
 ]
