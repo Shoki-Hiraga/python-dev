@@ -2,6 +2,7 @@ import sys
 import os
 import re
 import csv
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
 
@@ -20,6 +21,15 @@ seen_urls = set()
 total_matched = 0
 total_unique = 0
 csv_rows = []
+
+# CSV ヘッダー（= 期待する列数）
+header = [
+    "id", "maker_name_id", "model_name_id", "grade_name_id", "year",
+    "mileage", "min_price", "max_price", "sc_url", "created_at", "updated_at"
+]
+
+# ID 初期化
+new_id = 1
 
 for path in input_paths:
     with open(path, "r", encoding="utf-8") as infile:
@@ -42,7 +52,6 @@ for path in input_paths:
                     if filter_keyword in rec:
                         total_matched += 1
 
-                        # 正確な sc_url 抽出
                         match = re.search(r"'(https://autoc-one\.jp/ullo/biddedCar/\d+/)'", rec)
                         if not match:
                             continue
@@ -53,25 +62,32 @@ for path in input_paths:
                         seen_urls.add(sc_url)
                         total_unique += 1
 
-                        # フィールド抽出
+                        # フィールド分割
                         fields = [f.strip().strip("'") for f in re.split(r",(?![^()]*\))", rec)]
-                        if len(fields) < 11:
-                            continue  # 不正なデータ
 
-                        # id を NULL or 空に
-                        fields[0] = ''
+                        # NULL → 空文字に補正
+                        fields = ["" if f.upper() == "NULL" else f for f in fields]
+
+                        # mota4_4.sql だけ余計な date カラム（10番目）を削除
+                        if os.path.basename(path) == "market_price_mota4_4.sql" and len(fields) == len(header) + 1:
+                            del fields[9]
+
+                        # 列数を header に揃える
+                        if len(fields) < len(header):
+                            fields += [""] * (len(header) - len(fields))
+                        elif len(fields) > len(header):
+                            fields = fields[:len(header)]
+
+                        # ID を連番で付与
+                        fields[0] = str(new_id)
+                        new_id += 1
+
                         csv_rows.append(fields)
 
                 inside_insert = False
                 insert_lines = []
 
-# CSVヘッダー
-header = [
-    "id", "maker_name_id", "model_name_id", "grade_name_id", "year",
-    "mileage", "min_price", "max_price", "sc_url", "created_at", "updated_at"
-]
-
-# 書き出し
+# CSV 書き出し
 with open(output_csv_path, "w", encoding="utf-8", newline="") as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(header)

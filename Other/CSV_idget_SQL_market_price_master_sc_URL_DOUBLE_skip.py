@@ -2,6 +2,7 @@ import sys
 import os
 import re
 import csv
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from setting_file.header import *
 
@@ -20,6 +21,9 @@ seen_urls = set()
 total_matched = 0
 total_unique = 0
 csv_rows = []
+
+# ID 初期化（任意で1000001などにしてもOK）
+new_id = 1
 
 for path in input_paths:
     with open(path, "r", encoding="utf-8") as infile:
@@ -42,7 +46,6 @@ for path in input_paths:
                     if filter_keyword in rec:
                         total_matched += 1
 
-                        # 正確な sc_url 抽出
                         match = re.search(r"'(https://autoc-one\.jp/ullo/biddedCar/\d+/)'", rec)
                         if not match:
                             continue
@@ -53,19 +56,20 @@ for path in input_paths:
                         seen_urls.add(sc_url)
                         total_unique += 1
 
-                        # フィールド抽出
                         fields = [f.strip().strip("'") for f in re.split(r",(?![^()]*\))", rec)]
                         if len(fields) < 11:
-                            continue  # 不正なデータ
+                            continue
 
-                        # id を NULL or 空に
-                        fields[0] = ''
+                        # ID を連番で付与
+                        fields[0] = str(new_id)
+                        new_id += 1
+
                         csv_rows.append(fields)
 
                 inside_insert = False
                 insert_lines = []
 
-# CSVヘッダー
+# CSV ヘッダー
 header = [
     "id", "maker_name_id", "model_name_id", "grade_name_id", "year",
     "mileage", "min_price", "max_price", "sc_url", "created_at", "updated_at"
