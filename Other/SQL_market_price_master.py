@@ -8,7 +8,9 @@ from setting_file.header import *
 input_paths = [
     r"C:\Users\hiraga\Downloads\SQL\market_price_master_2_14.sql",
     r"C:\Users\hiraga\Downloads\SQL\market_price_master3_22.sql",
-    r"C:\Users\hiraga\Downloads\SQL\market_price_master3_31.sql"
+    r"C:\Users\hiraga\Downloads\SQL\market_price_master3_31.sql",
+    r"C:\Users\hiraga\Downloads\SQL\market_price_master4_4.sql",
+    r"C:\Users\hiraga\Downloads\SQL\market_price_mota4_4.sql"
 ]
 
 output_path = r"C:\Users\hiraga\Downloads\SQL\market_price_master_after.sql"
